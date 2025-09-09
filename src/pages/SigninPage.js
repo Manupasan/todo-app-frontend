@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
+import TextField from '@mui/material/TextField';
 
 function SigninPage() {
     const [username, setUsername] = useState("");
@@ -27,32 +28,56 @@ function SigninPage() {
     };
 
     return (
-        <div style={{ maxWidth: "400px", margin: "50px auto" }}>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username</label>
-                    <input
-                        type="text"
+        <Container maxWidth="xs">
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <Typography variant="h5" gutterBottom>
+                    Login
+                </Typography>
+
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <TextField
+                        label="Username"
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
+
+                    <TextField
+                        label="Password"
                         type="password"
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-        </div>
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Login
+                    </Button>
+
+                    {error && <Alert severity="error">{error}</Alert>}
+                </Box>
+            </Box>
+        </Container>
     );
+
 }
 
 export default SigninPage;
