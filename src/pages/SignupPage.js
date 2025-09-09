@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 
-function SigninPage() {
+function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,16 +17,13 @@ function SigninPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/auth/signin", {
+      const response = await api.post("/auth/signup", {
         username,
         password,
       });
 
-      // Save JWT token
-      localStorage.setItem("token", response.data);
-
-      // Redirect to tasks page
-      navigate("/tasks");
+      // Redirect to signin page
+      navigate("/signin");
     } catch (err) {
       if (err.response && err.response.data) {
         setError(err.response.data);
@@ -67,7 +64,7 @@ function SigninPage() {
           gutterBottom
           sx={{ fontWeight: "bold", color: "#1976d2" }}
         >
-          SignIn
+          SignUp
         </Typography>
 
         <Box
@@ -107,7 +104,7 @@ function SigninPage() {
             variant="contained"
             sx={{ mt: 2, mb: 2, borderRadius: 2 }}
           >
-            SignIn
+            SignUp
           </Button>
 
           {error && (
@@ -121,4 +118,4 @@ function SigninPage() {
   );
 }
 
-export default SigninPage;
+export default SignupPage;
